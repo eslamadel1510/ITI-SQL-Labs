@@ -72,20 +72,17 @@ HAVING AVG(e.Salary) < (
 					SELECT AVG(Salary) 
 					FROM Employee)
 
--- 7. Retrieve a list of employee’s names and the projects names they are working on ordered by department number and within each department, ordered alphabetically by last name, first name.
+-- 7. Retrieve a list of employeeâ€™s names and the projects names they are working on ordered by department number and within each department, ordered alphabetically by last name, first name.
 SELECT 
 	Fname + ' ' + Lname as name
 	,p.Pname
-	,d.Dnum
+	,p.Dnum
 
 FROM Employee e JOIN Works_for w 
 	ON e.SSN = w.ESSn  
 JOIN Project p 
 	ON w.Pno = p.Pnumber 
-JOIN Departments d 
-	ON p.Dnum = d.Dnum
-
-ORDER BY d.Dnum, Lname, Fname
+ORDER BY p.Dnum, Lname, Fname
 
 -- 8. Try to get the max 2 salaries using sub query
 SELECT MAX(Salary) maxSalary1
@@ -125,7 +122,7 @@ WHERE EXISTS (
     FROM Dependent d
     WHERE e.SSN = d.ESSN)
 
--- 11. In the department table insert new department called "DEPT IT”, with id 100, employee with SSN = 112233 as a manager for this department. The start date for this manager is '1-11-2006'
+-- 11. In the department table insert new department called "DEPT ITâ€, with id 100, employee with SSN = 112233 as a manager for this department. The start date for this manager is '1-11-2006'
 
 INSERT INTO Departments
 VALUES ('DEPT IT', 100, 112233, '1-11-2006')
@@ -184,7 +181,7 @@ UPDATE Works_for
 DELETE FROM Employee
 WHERE SSN = 223344
 
--- 14. Try to update all salaries of employees who work in Project ‘Al Rabwah’ by 30%
+-- 14. Try to update all salaries of employees who work in Project â€˜Al Rabwahâ€™ by 30%
 UPDATE Employee
 	SET Salary = Salary * 1.30
 	WHERE SSN IN (
